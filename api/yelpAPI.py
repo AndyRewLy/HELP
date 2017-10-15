@@ -1,31 +1,69 @@
 import requests
+from business import Business
 
-searchAPIBase = "https://api.yelp.com/v3/businesses/search"
+#VAPI URLs
+searchAPIBase = "https://api.yelp.com/v3/businesses/search?"
 businessAPIBase = "https://api.yelp.com/v3/businesses"
 
-token = "rxJdZ0OGS4CqJ2rpiUym1jJiMylojKD0s-g8zbPbOB2cOkKJL53k5VV849XzcGkM5u8_YH37lFdY2wZvaq5esz7Xr_BBNE9T8aS-luUiPb2yqrDPEy6Pz0ONywDVWXYx"
-
+#AAuthorization token and header
 headers = {'Authorization': 'Bearer ' + token}
 
-def getSearch(location, categories):
-   r = requests.get(searchAPIBase + "?location=" + location, headers=headers)
-   print searchAPIBase + "?location=" + location
+'''Function that gets information of a specific
+   business based on their id
+'''
+def getBusiness(restaurantId):
+   url = businessAPIBase + "/" + restaurantId
+   
+   response = requests.get(url, headers=headers)
 
+   businessJson = response.json()
+   businessInfo = Business(businessJson["url"], 
+                           businessJson["id"],
+                           businessJson["name"],
+                           businessJson["image_url"],
+                           businessJson["price"],
+                           businessJson["rating"],
+                           businessJson["categories"],
+                           " ".join(businessJson["location"]["display_address"]))
+   businessInfo.toString()
+
+   return businessInfo 
+
+''' Function that prints out the business id of
+    all businesses basd on location and category
+'''
+def getSearch(location, categories, longitude = None, latitude = None):
+   limit = 50
+   url = searchAPIBase + "location=" + location + "&limit=50&categories=" + categories[0]
+   r = requests.get(url , headers=headers)
+   businessIds = []
+   
    for business in r.json()["businesses"]:
       businessCategories = business["categories"]
       
       for category in businessCategories:
          
          if category["alias"] in categories:
-            print business["id"]
-
-   #print r.json()["businesses"]
+            businessIds.append(business["id"])
+  
+   print businessIds
+  
+   return businessIds
 
 def main():
 
-   getSearch("San Luis Obispo", ["coffee"]) 
-   print searchAPIBase
-   print businessAPIBase
+   print "Enter a location:"
+   location = raw_input()
+   
+   print "Enter a category(coffee,bubbletea,japanese,mexican):"
+   category = raw_input()
+
+   getSearch(location, [category]) 
+
+   print "Enter a business id"
+   busId = raw_input()
+   
+   getBusiness(busId)   
    return 1
 
 main()
