@@ -1,6 +1,11 @@
 import requests
 from business import Business
 
+#APIKey location - MUST CHANGE THIS TO YOUR FILE DIRECTORY
+yelpKeyFile = "/mnt/c/Users/Andrew Ly/Desktop/Fall2017/CPE480/AccessKeys/yelpAPIKey.txt"
+yelpFile = open(yelpKeyFile, "r")
+token = yelpFile.readline()
+
 #VAPI URLs
 searchAPIBase = "https://api.yelp.com/v3/businesses/search?"
 businessAPIBase = "https://api.yelp.com/v3/businesses"
