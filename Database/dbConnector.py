@@ -1,7 +1,6 @@
 import boto3
 
 dynamodb = boto3.resource('dynamodb')
-table = dynamodb.Table('HELPusers')
 
 '''
 Function that creates the HELPusers table
@@ -49,6 +48,8 @@ def putUser(username, prefs):
 Returns the user from the username given in a json array
 '''
 def getUser(username):
+    table = dynamodb.Table('HELPusers')
+
     response = table.get_item (
        Key = {
             'username': username,
@@ -58,3 +59,47 @@ def getUser(username):
     item = response['Item']
     print(item)
     return item
+
+'''
+Accepts a cateogryName as a string, categoryAlias as a string, and a list of maps of other category preferences
+map exaple: {'swim' : 3, 'kayak : 4'}
+'''
+def putActivity(categoryName, categoryAlias, categoryWeights):
+    table = dynamodb.Table('Actvities')
+
+    table.put_item (
+        Item = {
+            'categoryName' = categoryName
+            'categoryAlias' = categoryAlias
+            'categoryWeights' = categoryWeights
+        }
+    )
+
+def getActivity(categoryName, categoryAlias, categoryWeights):
+    table = dynamodb.Table('Activities')
+
+    tablie.put_item (
+        Item = {
+            'categoryName' = categoryName
+        }
+    )
+
+def putFood(categoryName, categoryAlias, categoryWeights):
+    table = dynamodb.Table('Foods')
+
+    table.put_item (
+        Item = {
+            'categoryName' = categoryName
+            'categoryAlias' = categoryAlias
+            'categoryWeights' = categoryWeights
+        }
+    )
+
+def getFood(categoryName, categoryAlias, categoryWeights):
+    table = dynamodb.Table('Foods')
+
+    table.put_item (
+        Item = {
+            'categoryName' = categoryName
+        }
+    )
