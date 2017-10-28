@@ -1,5 +1,5 @@
 import requests, googleplaces
-from Place import Place 
+from place import Place 
 
 #APIKey location - MUST CHANGE THIS TO YOUR FILE DIRECTORY
 googlePlacesKeyFile = "/Users/nlcortez/Documents/SchoolWork/2017-2018/Fall2017/CPE480/HELP/googlePlacesAPIKey.txt"
