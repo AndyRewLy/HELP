@@ -64,16 +64,52 @@ def getHighestComparison(userSimilarities, username):
 
    return (matchedActivityUsers, matchedFoodUsers)
 
+#Takes in users (user objects) and activityUsers(usernames only)
+def recommendActivities(users, activityUsers, currUser):
+   activities = []
+   currActivities = []
+   for user in users:
+      if user.username == currUser:
+          currActivities = user.activityLikes
+          break
+   
+   for user in users:
+      username = user.username
+      if username in activityUsers:
+         for activity in user.activityLikes:
+            if activity not in activities and activity not in currActivities:
+               activities.append(activity)
+      
+   print activities
+   return activities
+   
+def recommendFoods(users, foodUsers, currUser):
+   foods = []
+   currFoods = []
+   for user in users:
+      if user.username == currUser:
+          currFoods = user.foodLikes
+          break
+   
+   for user in users:
+      username = user.username
+      if username in foodUsers:
+         for food in user.foodLikes:
+            if food not in foods and food not in currFoods:
+               foods.append(food)
+      
+   print foods
+   return foods
+
 def main():
-   users = [User('chicken', ['chicken'], []),
-            User('chicken1', ['chicken', 'running'], []),
-            User('natashaeatschickens', ['chicken'], [])]
+   users = [User('chicken', ['eating'], ['chinese', 'japanese']),
+            User('chicken1', ['eating', 'running'], ['chinese', 'bolivian']),
+            User('natashaeatschickens', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
 
    user_input = raw_input("Input a user:")
    userSimilarities = createAgglomerateCluster(users)
    (activityUsers, foodUsers) = getHighestComparison(userSimilarities, user_input)
 
-   print activityUsers
-   print foodUsers
-
+   recommendActivities(users, activityUsers, user_input)
+   recommendFoods(users, foodUsers, user_input)
 main()
