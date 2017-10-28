@@ -1,8 +1,10 @@
 import json
 
 def createAgglomerateCluster(users):
-   
+  
+   for user1 in users:
+      for user2 in users:
+         user1[user2] 
 
-   for user in users:
 def main():
    
