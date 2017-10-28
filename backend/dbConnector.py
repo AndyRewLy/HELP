@@ -69,7 +69,7 @@ def putActivity(categoryName, categoryAlias, categoryWeights):
 
     table.put_item (
         Item = {
-            'categoryName' : categoryName,
+            'Name' : categoryName,
             'categoryAlias' : categoryAlias,
             'categoryWeights' : categoryWeights
         }
@@ -78,8 +78,8 @@ def putActivity(categoryName, categoryAlias, categoryWeights):
 def getActivity(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Activities')
 
-    tablie.put_item (
-        Item = {
+    table.get_item (
+        Key = {
             'categoryName' : categoryName
         }
     )
@@ -89,7 +89,7 @@ def putFood(categoryName, categoryAlias, categoryWeights):
 
     table.put_item (
         Item = {
-            'categoryName' : categoryName,
+            'Name' : categoryName,
             'categoryAlias' : categoryAlias,
             'categoryWeights' : categoryWeights
         }
@@ -98,8 +98,8 @@ def putFood(categoryName, categoryAlias, categoryWeights):
 def getFood(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Foods')
 
-    table.put_item (
-        Item = {
+    table.get_item (
+        Key = {
             'categoryName' : categoryName
         }
     )
