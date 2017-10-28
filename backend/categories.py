@@ -1,12 +1,16 @@
 import json
+from dbConnector import *
 from pprint import pprint
 
 def getJsonFromFile(fileName):
-   
+
    with open(fileName) as data_file:
       data = json.load(data_file)
 
    return data
+
+def categoriesToDB (foodObjects, parentObjects):
+    return
 
 def main():
    fileName = "categories.json"
@@ -21,9 +25,9 @@ def main():
    for category in jsonData:
       alias = category["alias"]
       title = category["title"]
-   
+
       categoryObject = {"alias": alias, "name": title}
-      
+
       parents = category["parents"]
 
       for parent in parents:
@@ -31,7 +35,7 @@ def main():
             activeCategories.insert(0, categoryObject)
          elif parent in foodParents:
             foodCategories.insert(0, categoryObject)
-                      
+
 
    #print activeCategories
    #print "\n"
@@ -39,14 +43,14 @@ def main():
 
    activeObjects = []
    foodObjects = []
-   
+
    for category1 in activeCategories:
       alias = category1["alias"]
       relationList = []
 
       for category2 in activeCategories:
           newRelation = {category2["alias"]: 0, "name": category2["name"]}
-          
+
           relationList.insert(0, newRelation)
 
       activeObjects.insert(0, {"alias": alias, "weights": relationList})
@@ -58,11 +62,14 @@ def main():
 
       for category2 in foodCategories:
           newRelation = {category2["alias"]: 0, "name": category2["name"]}
-         
+
           relationList.insert(0, newRelation)
 
       foodObjects.insert(0, {"alias": alias, "weights": relationList})
 
    print foodObjects
    print activeObjects
+
+   categoriesToDB(foodObjects, activeObjects)
+
 main()
