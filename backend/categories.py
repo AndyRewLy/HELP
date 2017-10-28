@@ -9,7 +9,11 @@ def getJsonFromFile(fileName):
 
    return data
 
-def categoriesToDB (foodObjects, parentObjects):
+def categoriesToDB (foodObjects, activeObjects):
+    for x in foodObjects:
+        putFood(x.get("name"), x.get("alias"), x.get("weights"))
+    for x in activeObjects:
+        putActivity(x.get("name"), x.get("alias"), x.get("weights"))
     return
 
 def main():
@@ -46,6 +50,7 @@ def main():
 
    for category1 in activeCategories:
       alias = category1["alias"]
+      name = category1["name"]
       relationList = []
 
       for category2 in activeCategories:
@@ -53,11 +58,12 @@ def main():
 
           relationList.insert(0, newRelation)
 
-      activeObjects.insert(0, {"alias": alias, "weights": relationList})
+      activeObjects.insert(0, {"alias": alias, "name" : name, "weights": relationList})
       #activeObjects.insert(0, {"alias": alias, "weights": relationList})
 
    for category1 in foodCategories:
       alias = category1["alias"]
+      name = category1["name"]
       relationList = []
 
       for category2 in foodCategories:
@@ -65,10 +71,10 @@ def main():
 
           relationList.insert(0, newRelation)
 
-      foodObjects.insert(0, {"alias": alias, "weights": relationList})
+      foodObjects.insert(0, {"alias": alias, "name": name, "weights": relationList})
 
-   print foodObjects
-   print activeObjects
+   #print foodObjects[0].get("alias")
+   #print activeObjects
 
    categoriesToDB(foodObjects, activeObjects)
 

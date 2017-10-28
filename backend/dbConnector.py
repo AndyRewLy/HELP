@@ -34,13 +34,14 @@ def createTable():
 Accepts a username as a string, as well as a map of preferences
 map example: {'swim' : 3, 'kayak' : 4}
 '''
-def putUser(username, prefs):
+def putUser(username, foodPrefs, activePrefs):
     table = dynamodb.Table('HELPusers')
 
     table.put_item(
        Item = {
             'username': username,
-            'preferences': prefs
+            'foodPrefs': foodPrefs,
+            'activePrefs' : activePrefs
         }
     )
 
@@ -69,7 +70,7 @@ def putActivity(categoryName, categoryAlias, categoryWeights):
 
     table.put_item (
         Item = {
-            'categoryName' : categoryName,
+            'Name' : categoryName,
             'categoryAlias' : categoryAlias,
             'categoryWeights' : categoryWeights
         }
@@ -78,8 +79,8 @@ def putActivity(categoryName, categoryAlias, categoryWeights):
 def getActivity(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Activities')
 
-    tablie.put_item (
-        Item = {
+    table.get_item (
+        Key = {
             'categoryName' : categoryName
         }
     )
@@ -89,7 +90,7 @@ def putFood(categoryName, categoryAlias, categoryWeights):
 
     table.put_item (
         Item = {
-            'categoryName' : categoryName,
+            'Name' : categoryName,
             'categoryAlias' : categoryAlias,
             'categoryWeights' : categoryWeights
         }
@@ -98,8 +99,8 @@ def putFood(categoryName, categoryAlias, categoryWeights):
 def getFood(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Foods')
 
-    table.put_item (
-        Item = {
+    table.get_item (
+        Key = {
             'categoryName' : categoryName
         }
     )
