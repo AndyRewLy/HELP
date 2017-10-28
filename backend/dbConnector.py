@@ -34,13 +34,14 @@ def createTable():
 Accepts a username as a string, as well as a map of preferences
 map example: {'swim' : 3, 'kayak' : 4}
 '''
-def putUser(username, prefs):
+def putUser(username, foodPrefs, activePrefs):
     table = dynamodb.Table('HELPusers')
 
     table.put_item(
        Item = {
             'username': username,
-            'preferences': prefs
+            'foodPrefs': foodPrefs,
+            'activePrefs' : activePrefs
         }
     )
 
