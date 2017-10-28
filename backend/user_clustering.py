@@ -30,7 +30,7 @@ def createAgglomerateCluster(users):
       userEntry = {}
       for user2 in users:
          if user1.username != user2.username:
-            userEntry[user2.username] = {'actiity': compareUserActivities(user1, user2), 
+            userEntry[user2.username] = {'activity': compareUserActivities(user1, user2), 
                                          'food': compareUserFoods(user1, user2)} 
       userSimilarities[user1.username] = userEntry
 
