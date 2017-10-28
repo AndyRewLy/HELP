@@ -1,5 +1,5 @@
 import json
-
+from user import User
 
 def compareUserActivities(user1, user2):
    
@@ -8,7 +8,7 @@ def compareUserActivities(user1, user2):
    for like1 in user1.activityLikes:
       for like2 in user2.activityLikes:
          if like1 == like2:
-            likenessScore++
+            likenessScore+=1
          
    return likenessScore
 
@@ -19,7 +19,7 @@ def compareUserFoods(user1, user2):
    for like1 in user1.foodLikes:
       for like2 in user2.foodLikes:
          if like1 == like2:
-            likenessScore++
+            likenessScore+=1
          
    return likenessScore
 
@@ -29,10 +29,17 @@ def createAgglomerateCluster(users):
    for user1 in users:
       userEntry = {}
       for user2 in users:
-         userEntry[user2.username] = {'actiity': compareUserActivities(user1, user2), 
-                                      'food': compareUserFoods(user1, user2} 
+         if user1.username != user2.username:
+            userEntry[user2.username] = {'actiity': compareUserActivities(user1, user2), 
+                                         'food': compareUserFoods(user1, user2)} 
       userSimilarities[user1.username] = userEntry
 
+   return userSimilarities
 
 def main():
-      
+   users = [User('chicken', ['chicken'], []),
+            User('chicken1', ['chicken', 'running'], [])]
+
+   createAgglomerateCluster(users)
+
+main()
