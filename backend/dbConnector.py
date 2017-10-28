@@ -69,9 +69,9 @@ def putActivity(categoryName, categoryAlias, categoryWeights):
 
     table.put_item (
         Item = {
-            'categoryName' = categoryName
-            'categoryAlias' = categoryAlias
-            'categoryWeights' = categoryWeights
+            'categoryName' : categoryName,
+            'categoryAlias' : categoryAlias,
+            'categoryWeights' : categoryWeights
         }
     )
 
@@ -80,7 +80,7 @@ def getActivity(categoryName, categoryAlias, categoryWeights):
 
     tablie.put_item (
         Item = {
-            'categoryName' = categoryName
+            'categoryName' : categoryName
         }
     )
 
@@ -89,9 +89,9 @@ def putFood(categoryName, categoryAlias, categoryWeights):
 
     table.put_item (
         Item = {
-            'categoryName' = categoryName
-            'categoryAlias' = categoryAlias
-            'categoryWeights' = categoryWeights
+            'categoryName' : categoryName,
+            'categoryAlias' : categoryAlias,
+            'categoryWeights' : categoryWeights
         }
     )
 
@@ -100,6 +100,6 @@ def getFood(categoryName, categoryAlias, categoryWeights):
 
     table.put_item (
         Item = {
-            'categoryName' = categoryName
+            'categoryName' : categoryName
         }
     )
