@@ -1,4 +1,4 @@
-class User:
+class User():
    """A User representation of the class"""
 
    def __init__(self, username, activityLikes, foodLikes):
@@ -6,5 +6,8 @@ class User:
       self.activityLikes = activityLikes
       self.foodLikes = foodLikes
 
-   
-   
+
+def userJSON(user):
+   return {'username': user.username,
+   	       'activityLikes': user.activityLikes,
+   	       'foodLikes': user.foodLikes}
