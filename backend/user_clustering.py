@@ -80,7 +80,7 @@ def recommendActivities(users, activityUsers, currUser):
             if activity not in activities and activity not in currActivities:
                activities.append(activity)
       
-   print activities
+   print(activities)
    return activities
    
 def recommendFoods(users, foodUsers, currUser):
@@ -98,15 +98,15 @@ def recommendFoods(users, foodUsers, currUser):
             if food not in foods and food not in currFoods:
                foods.append(food)
       
-   print foods
+   print(foods)
    return foods
 
 def main():
    users = [User('user1', ['eating'], ['chinese', 'japanese']),
             User('user2', ['eating', 'running'], ['chinese', 'bolivian']),
             User('user3', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
-
-   user_input = raw_input("Input a user:")
+            
+   user_input = input("Input a user:")
    userSimilarities = createAgglomerateCluster(users)
    (activityUsers, foodUsers) = getHighestComparison(userSimilarities, user_input)
 
