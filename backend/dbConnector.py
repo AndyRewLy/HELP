@@ -58,7 +58,7 @@ def getUser(username):
     )
 
     item = response['Item']
-    print(item)
+    #print(item)
     return item
 
 '''
@@ -79,11 +79,15 @@ def putActivity(categoryName, categoryAlias, categoryWeights):
 def getActivity(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Activities')
 
-    table.get_item (
+    response = table.get_item (
         Key = {
             'categoryName' : categoryName
         }
     )
+
+    item = response['Item']
+    #print(item)
+    return item
 
 def putFood(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Foods')
@@ -99,8 +103,12 @@ def putFood(categoryName, categoryAlias, categoryWeights):
 def getFood(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Foods')
 
-    table.get_item (
+    response = table.get_item (
         Key = {
             'categoryName' : categoryName
         }
     )
+
+    item = response['Item']
+    #print(item)
+    return item
