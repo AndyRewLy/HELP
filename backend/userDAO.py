@@ -1,6 +1,7 @@
 from flask_restful import Resource
+from flask import make_response
 from flask_jsonpify import jsonify
-from user import *
+from .user import *
 
 
 class UserDAO(Resource):
@@ -14,7 +15,6 @@ class UserDAO(Resource):
 
       for user in users:
         if user.username == username:
-        	
         	return jsonify(userJSON(user))
        
-      return jsonify({'data':{'username': 'chicken'}})
+      return jsonify({'data':{'username': 'invalid username' + username}})

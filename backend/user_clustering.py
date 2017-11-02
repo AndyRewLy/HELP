@@ -102,9 +102,9 @@ def recommendFoods(users, foodUsers, currUser):
    return foods
 
 def main():
-   users = [User('chicken', ['eating'], ['chinese', 'japanese']),
-            User('chicken1', ['eating', 'running'], ['chinese', 'bolivian']),
-            User('natashaeatschickens', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
+   users = [User('user1', ['eating'], ['chinese', 'japanese']),
+            User('user2', ['eating', 'running'], ['chinese', 'bolivian']),
+            User('user3', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
 
    user_input = raw_input("Input a user:")
    userSimilarities = createAgglomerateCluster(users)
