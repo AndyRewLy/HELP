@@ -56,10 +56,9 @@ def getUser(username):
             'username': username,
         }
     )
-
-    item = response['Item']
+  
     #print(item)
-    return item
+    return getResponseItem(response)
 
 '''
 Accepts a cateogryName as a string, categoryAlias as a string, and a list of maps of other category preferences
@@ -85,9 +84,8 @@ def getActivity(categoryName, categoryAlias, categoryWeights):
         }
     )
 
-    item = response['Item']
     #print(item)
-    return item
+    return getResponseItem(response)
 
 def putFood(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Foods')
@@ -109,6 +107,13 @@ def getFood(categoryName, categoryAlias, categoryWeights):
         }
     )
 
-    item = response['Item']
     #print(item)
+    return getResponseItem(response)
+
+def getResponseItem(response):
+    if 'Item' in response.keys():
+       item = response['Item']
+       print(item)
+    else:
+        item = {}
     return item
