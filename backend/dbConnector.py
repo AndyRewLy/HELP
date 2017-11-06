@@ -144,5 +144,3 @@ def getResponseItem(response):
     else:
         item = {}
     return item
-
-putUser("agupta")
