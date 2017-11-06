@@ -16,14 +16,3 @@ api = Api(app)
 
 api.add_resource(UserDAO, '/User/<username>')
 activeUsers = []
-
-@app.route('/')
-def index():
-   if not session.get('logged_in'):
-      return render_template('login.html') 
-   return render_template("index.html")
-   
-@app.route('/templates/<path:path>')
-def send_js(path):
-
-   return send_from_directory('templates', path)
