@@ -1,5 +1,5 @@
 import boto3
-
+from categories import *
 dynamodb = boto3.resource('dynamodb')
 
 '''
@@ -33,15 +33,21 @@ def createTable():
 '''
 Accepts a username as a string, as well as a map of preferences
 map example: {'swim' : 3, 'kayak' : 4}
+If only a username is provided, all preferences will default to zero
 '''
-def putUser(username, activityLikes, foodLikes):
+def putUser(username, activityLikes = None, foodLikes = None):
+    from categories import getCategories
     table = dynamodb.Table('HELPusers')
+
+    if (activityLikes is None and foodLikes is None):
+        (activeCategories, foodCategories) = getCategories()
+        (activityLikes, foodLikes) = getPreferences(activeCategories, foodCategories)
 
     table.put_item(
        Item = {
             'username': username,
             'activityLikes': activityLikes,
-            'foodLikes' : foodLikes
+            'foodLikes': foodLikes
         }
     )
 
@@ -57,20 +63,35 @@ def getUser(username):
         }
     )
 
-    #print(item)
     return getResponseItem(response)
 
+'''
+Returns all possible users in the database
+There is a memory limit on this so if there are too many users,
+all users may not be returned --> WIP
+'''
 def getAllUsers():
     table = dynamodb.Table('HELPusers')
 
     response = table.scan()
 
-    #print(response)
     return getResponseItem(response)
+
+
+'''
+To intialize all the preferences in the database
+'''
+def categoriesToDB (foodObjects, activeObjects):
+    for x in foodObjects:
+        putFood(x.get("name"), x.get("alias"), x.get("weights"))
+    for x in activeObjects:
+        putActivity(x.get("name"), x.get("alias"), x.get("weights"))
+    return
+
 
 '''
 Accepts a cateogryName as a string, categoryAlias as a string, and a list of maps of other category preferences
-map exaple: {'swim' : 3, 'kayak : 4'}
+map example: {'swim' : 3, 'kayak : 4'}
 '''
 def putActivity(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Actvities')
@@ -92,7 +113,6 @@ def getActivity(categoryName, categoryAlias, categoryWeights):
         }
     )
 
-    #print(item)
     return getResponseItem(response)
 
 def putFood(categoryName, categoryAlias, categoryWeights):
@@ -115,7 +135,6 @@ def getFood(categoryName, categoryAlias, categoryWeights):
         }
     )
 
-    #print(item)
     return getResponseItem(response)
 
 def getResponseItem(response):
@@ -125,3 +144,5 @@ def getResponseItem(response):
     else:
         item = {}
     return item
+
+putUser("agupta")
