@@ -56,8 +56,16 @@ def getUser(username):
             'username': username,
         }
     )
-  
+
     #print(item)
+    return getResponseItem(response)
+
+def getAllUsers():
+    table = dynamodb.Table('HELPusers')
+
+    response = table.scan()
+
+    print(response)
     return getResponseItem(response)
 
 '''
