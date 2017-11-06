@@ -1,5 +1,5 @@
 import boto3
-from categories import *
+from .categories import *
 dynamodb = boto3.resource('dynamodb')
 
 '''
