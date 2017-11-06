@@ -65,7 +65,7 @@ def getAllUsers():
 
     response = table.scan()
 
-    print(response)
+    #print(response)
     return getResponseItem(response)
 
 '''
