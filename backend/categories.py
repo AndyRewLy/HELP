@@ -67,8 +67,8 @@ def getPreferences(activeCategories, foodCategories):
    foodPreferences = {}
 
    for activity in activeCategories:
-       activePreferences.update({activity["name"] : 0})
+       activePreferences.update({activity["alias"] : 0})
    for food in foodCategories:
-       foodPreferences.update({food["name"] : 0})
+       foodPreferences.update({food["alias"] : 0})
 
    return (activePreferences, foodPreferences)
