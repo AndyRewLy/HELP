@@ -101,15 +101,24 @@ def recommendFoods(users, foodUsers, currUser):
    print(foods)
    return foods
 
-def main():
+def getActivityRecommendations(username):
    users = [User('user1', ['eating'], ['chinese', 'japanese']),
             User('user2', ['eating', 'running'], ['chinese', 'bolivian']),
             User('user3', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
-            
-   user_input = input("Input a user:")
+   
    userSimilarities = createAgglomerateCluster(users)
-   (activityUsers, foodUsers) = getHighestComparison(userSimilarities, user_input)
+   (activityUsers, foodUsers) = getHighestComparison(userSimilarities, username)
 
-   recommendActivities(users, activityUsers, user_input)
-   recommendFoods(users, foodUsers, user_input)
-main()
+   return recommendActivities(users, activityUsers, username)
+
+
+def getFoodRecommendations(username):
+   users = [User('user1', ['eating'], ['chinese', 'japanese']),
+            User('user2', ['eating', 'running'], ['chinese', 'bolivian']),
+            User('user3', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
+
+   userSimilarities = createAgglomerateCluster(users)
+   (activityUsers, foodUsers) = getHighestComparison(userSimilarities, username)
+
+   return recommendFoods(users, foodUsers, username)
+
