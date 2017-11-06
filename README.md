@@ -7,6 +7,10 @@ To Install React:
    - rm -rf node_modules
    - npm install
 
+React Dependencies:
+	- Install axios 
+		- npm install axios
+
 To Use React:
    - navigate to help-react/
    - npm start
