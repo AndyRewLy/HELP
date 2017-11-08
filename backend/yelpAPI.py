@@ -1,8 +1,8 @@
 import requests
-from business import Business
+from .business import Business
 
 #APIKey location - MUST CHANGE THIS TO YOUR FILE DIRECTORY
-yelpKeyFile = "/mnt/c/Users/Andrew Ly/Desktop/Fall2017/CPE480/AccessKeys/yelpAPIKey.txt"
+yelpKeyFile = "/Users/nlcortez/Documents/SchoolWork/2017-2018/Fall2017/CPE480/HELP/yelpAPIKey.txt"
 yelpFile = open(yelpKeyFile, "r")
 token = yelpFile.readline()
 
@@ -39,7 +39,7 @@ def getBusiness(restaurantId):
 '''
 def getSearch(location, categories, longitude = None, latitude = None):
    limit = 50
-   url = searchAPIBase + "location=" + location + "&limit=50&categories=" + categories[0]
+   url = searchAPIBase + "location=" + location + "&limit=5&categories=" + categories[0]
    r = requests.get(url , headers=headers)
    businessIds = []
    
@@ -50,11 +50,10 @@ def getSearch(location, categories, longitude = None, latitude = None):
          
          if category["alias"] in categories:
             businessIds.append(business["id"])
-  
-   print businessIds
-  
+
    return businessIds
 
+'''
 def main():
 
    print "Enter a location:"
@@ -72,3 +71,4 @@ def main():
    return 1
 
 main()
+'''
