@@ -1,5 +1,6 @@
 import json
-from user import User
+from .user import User, jsonToUser
+from .dbConnector import getAllUsers
 
 def compareUserActivities(user1, user2):
    
@@ -25,14 +26,16 @@ def compareUserFoods(user1, user2):
 
 def createAgglomerateCluster(users):
    userSimilarities = {}  
-
    for user1 in users:
       userEntry = {}
       for user2 in users:
-         if user1.username != user2.username:
-            userEntry[user2.username] = {'activity': compareUserActivities(user1, user2), 
-                                         'food': compareUserFoods(user1, user2)} 
-      userSimilarities[user1.username] = userEntry
+         user1Obj = jsonToUser(user1)
+         user2Obj = jsonToUser(user2)
+
+         if user1Obj.username != user2Obj.username:   
+            userEntry[user2Obj.username] = {'activity': compareUserActivities(user1Obj, user2Obj), 
+                                         'food': compareUserFoods(user1Obj, user2Obj)} 
+      userSimilarities[user1Obj.username] = userEntry
 
    return userSimilarities
 
@@ -87,14 +90,17 @@ def recommendFoods(users, foodUsers, currUser):
    foods = []
    currFoods = []
    for user in users:
-      if user.username == currUser:
-          currFoods = user.foodLikes
+      print(user)
+      userObj = jsonToUser(user)
+      if userObj.username == currUser:
+          currFoods = userObj.foodLikes
           break
    
    for user in users:
-      username = user.username
+      userObj = jsonToUser(user)
+      username = userObj.username
       if username in foodUsers:
-         for food in user.foodLikes:
+         for food in userObj.foodLikes:
             if food not in foods and food not in currFoods:
                foods.append(food)
       
@@ -102,9 +108,7 @@ def recommendFoods(users, foodUsers, currUser):
    return foods
 
 def getActivityRecommendations(username):
-   users = [User('user1', ['eating'], ['chinese', 'japanese']),
-            User('user2', ['eating', 'running'], ['chinese', 'bolivian']),
-            User('user3', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
+   users = getAllUsers()
    
    userSimilarities = createAgglomerateCluster(users)
    (activityUsers, foodUsers) = getHighestComparison(userSimilarities, username)
@@ -113,12 +117,17 @@ def getActivityRecommendations(username):
 
 
 def getFoodRecommendations(username):
-   users = [User('user1', ['eating'], ['chinese', 'japanese']),
-            User('user2', ['eating', 'running'], ['chinese', 'bolivian']),
-            User('user3', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
+   users = getAllUsers()
 
    userSimilarities = createAgglomerateCluster(users)
-   (activityUsers, foodUsers) = getHighestComparison(userSimilarities, username)
+   print("Priniting users...")
+   print(users)
 
+   print("Printing User Similarities")
+   print(userSimilarities)
+
+   (activityUsers, foodUsers) = getHighestComparison(userSimilarities, username)
+   print("Printing Food users...")
+   print(foodUsers)
    return recommendFoods(users, foodUsers, username)
 

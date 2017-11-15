@@ -2,7 +2,7 @@ import requests
 from .business import Business
 
 #APIKey location - MUST CHANGE THIS TO YOUR FILE DIRECTORY
-yelpKeyFile = "/Users/nlcortez/Documents/SchoolWork/2017-2018/Fall2017/CPE480/HELP/yelpAPIKey.txt"
+yelpKeyFile = "C:\\Users\\Andrew Ly\\Desktop\\Fall2017\\CPE480\\AccessKeys\\yelpAPIKey.txt"
 yelpFile = open(yelpKeyFile, "r")
 token = yelpFile.readline()
 
@@ -52,23 +52,3 @@ def getSearch(location, categories, longitude = None, latitude = None):
             businessIds.append(business["id"])
 
    return businessIds
-
-'''
-def main():
-
-   print "Enter a location:"
-   location = raw_input()
-   
-   print "Enter a category(coffee,bubbletea,japanese,mexican):"
-   category = raw_input()
-
-   getSearch(location, [category]) 
-
-   print "Enter a business id"
-   busId = raw_input()
-   
-   getBusiness(busId)   
-   return 1
-
-main()
-'''

@@ -1,5 +1,8 @@
 import boto3
+from .user import User, jsonToUser
 from .categories import *
+from collections import namedtuple
+
 dynamodb = boto3.resource('dynamodb')
 
 '''
@@ -40,8 +43,10 @@ def putUser(username, activityLikes = None, foodLikes = None):
     table = dynamodb.Table('HELPusers')
 
     if (activityLikes is None and foodLikes is None):
-        (activeCategories, foodCategories) = getCategories()
-        (activityLikes, foodLikes) = getPreferences(activeCategories, foodCategories)
+        activityLikes = []
+        foodLikes = []
+        #(activeCategories, foodCategories) = getCategories()
+        #(activityLikes, foodLikes) = getPreferences(activeCategories, foodCategories)
 
     table.put_item(
        Item = {
@@ -63,7 +68,11 @@ def getUser(username):
         }
     )
 
-    return getResponseItem(response)
+    responseItem = getResponseItem(response)
+    if (bool(responseItem)):
+       print(jsonToUser(responseItem))
+
+    return responseItem
 
 '''
 Returns all possible users in the database
@@ -74,8 +83,13 @@ def getAllUsers():
     table = dynamodb.Table('HELPusers')
 
     response = table.scan()
+    responseItem = getResponseItems(response)
+    users = []
 
-    return getResponseItem(response)
+    for user in responseItem:
+        users.append(jsonToUser(user))
+
+    return responseItem
 
 
 '''
@@ -140,7 +154,15 @@ def getFood(categoryName, categoryAlias, categoryWeights):
 def getResponseItem(response):
     if 'Item' in response.keys():
        item = response['Item']
-       print(item)
     else:
         item = {}
+
     return item
+
+def getResponseItems(response):
+    if 'Items' in response.keys():
+       items = response['Items']
+    else:
+        items = []
+
+    return items
