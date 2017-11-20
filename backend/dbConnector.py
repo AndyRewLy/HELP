@@ -34,12 +34,11 @@ def createTable():
     print(newtable.item_count)
 
 '''
-Accepts a username as a string, as well as a map of preferences
-map example: {'swim' : 3, 'kayak' : 4}
+Accepts a username as a string, as well as a list of string prefs
+pref example: {'swim', 'kayak'}
 If only a username is provided, all preferences will default to zero
 '''
 def putUser(username, activityLikes = None, foodLikes = None):
-    from categories import getCategories
     table = dynamodb.Table('HELPusers')
 
     if (activityLikes is None and foodLikes is None):
@@ -104,8 +103,8 @@ def categoriesToDB (foodObjects, activeObjects):
 
 
 '''
-Accepts a cateogryName as a string, categoryAlias as a string, and a list of maps of other category preferences
-map example: {'swim' : 3, 'kayak : 4'}
+Accepts a cateogryName as a string, categoryAlias as a string, and string prefs
+pref example: {'swim', 'kayak'}
 '''
 def putActivity(categoryName, categoryAlias, categoryWeights):
     table = dynamodb.Table('Actvities')
