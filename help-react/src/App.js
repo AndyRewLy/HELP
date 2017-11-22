@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import './index.css';
 import axios from 'axios';
 
 import NavPage from './components/Pages/NavPage.js';
@@ -25,19 +25,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div class="app-content">
-          <NavPage/>
+        <div className="app-content">
         </div>
         <input type="text"
                name="userInput"
                value={this.state.userInput}
                onChange={this.setUserName}/>
-        <button class="buttons" onClick={this.getUser}>Get User</button>
+        <button className="btn btn-large btn-success" onClick={this.getUser}>Get User</button>
         <p>Current User: {this.state.user.username}</p>
         <p>All user activity likes: {this.state.user.activityLikes}</p>
         <p>All user food likes: {this.state.user.foodLikes}</p>
 
-        <button class="buttons" onClick={this.getFoodRecommendations}>Get Food Recommendations</button>
+        <button className="btn btn-large btn-success" onClick={this.getFoodRecommendations}>Get Food Recommendations</button>
         <p>Recommended Food Likes: {this.state.recommendedFood}</p>
       </div>
     );

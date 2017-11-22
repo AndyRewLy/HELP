@@ -2,7 +2,7 @@ import requests
 from .business import Business
 
 #APIKey location - MUST CHANGE THIS TO YOUR FILE DIRECTORY
-yelpKeyFile = "C:\\Users\\Andrew Ly\\Desktop\\Fall2017\\CPE480\\AccessKeys\\yelpAPIKey.txt"
+yelpKeyFile = "/Users/nlcortez/Documents/SchoolWork/2017-2018/Fall2017/CPE480/HELP/yelpAPIKey.txt"
 yelpFile = open(yelpKeyFile, "r")
 token = yelpFile.readline()
 

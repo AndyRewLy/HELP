@@ -103,7 +103,6 @@ def recommendFoods(users, foodUsers, currUser):
          for food in userObj.foodLikes:
             if food not in foods and food not in currFoods:
                foods.append(food)
-      
    print(foods)
    return foods
 
@@ -120,7 +119,7 @@ def getFoodRecommendations(username):
    users = getAllUsers()
 
    userSimilarities = createAgglomerateCluster(users)
-   print("Priniting users...")
+   print("Printing users...")
    print(users)
 
    print("Printing User Similarities")

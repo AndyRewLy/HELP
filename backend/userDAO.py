@@ -1,7 +1,7 @@
 from flask_restful import Resource
 from flask import make_response
 from flask_jsonpify import jsonify
-from .user_clustering import getFoodRecommendations, getActivityRecommendations
+from .user_clustering import getFoodRecommendations, getActivityRecommendations, getAllUsers
 from .user import *
 from .dbConnector import getUser
 from .yelpAPI import getBusiness, getSearch
@@ -23,6 +23,10 @@ class UserDAO(Resource):
       # 
       #return jsonify({'data':{'username': 'invalid username' + username}})
 
+class UsersAll(Resource):
+
+    def get(self):
+        return jsonify({'data': getAllUsers()})
 
 class UserRecommendationFood(Resource):
  

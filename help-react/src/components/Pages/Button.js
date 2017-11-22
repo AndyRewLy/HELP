@@ -6,7 +6,7 @@ import '../../bootstrap-3.3.7-dist/css/bootstrap.min.css';
 class Button extends Component {
   render() {
     return ( 
-      <div class="Button" onClick={this.props.onClick}>
+      <div className="Button" onClick={this.props.onClick}>
         {this.props.content}
       </div>
     );
