@@ -6,3 +6,19 @@
   margin-right: 15px;
   box-shadow: 0 0 3px 2px #cccccc;
 }
+
+#yes {
+	float: left;
+	padding: 10px;
+	padding-left: 20px;
+	padding-bottom: 0px;
+	color: #00FF00;
+}
+
+#no {
+	float: right;
+	padding: 10px;
+	padding-right: 20px;
+	padding-bottom: 0px;
+	color: #FF0000;
+}

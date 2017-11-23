@@ -7,6 +7,7 @@ import Callout from './Callout.js';
 import axios from 'axios';
 
 import CardsList from '../Cards/CardsList.js';
+import RecommendationCardList from '../Cards/RecommendationCardList.js';
 
 
 class HomePage extends Component {
@@ -76,7 +77,7 @@ class HomePage extends Component {
         <button className="btn btn-large btn-success" onClick={this.getFoodRecommendations}>Get Food Recommendations</button>
         <div id="recommendedFood">
           <p>Recommended Foods:</p>
-          <CardsList listFromParent={this.state.recommendedFood}/>
+          <RecommendationCardList listFromParent={this.state.recommendedFood}/>
         </div>
       </div>
     );
