@@ -5,6 +5,7 @@ import Button from './Button.js';
 import LoginForm from '../Forms/LoginForm.js'
 import Callout from './Callout.js';
 import axios from 'axios';
+import '../../index.css';
 
 import CardsList from '../Cards/CardsList.js';
 import RecommendationCardList from '../Cards/RecommendationCardList.js';
@@ -17,6 +18,7 @@ class HomePage extends Component {
     this.state = {
       user: {},
       username: '',
+      isLoggedIn: false,
       isCalloutVisible: false,
       recommendedActivities: [],
       recommendedFood: [],
@@ -57,6 +59,16 @@ class HomePage extends Component {
 
     return (
       <div className = "HomePage">
+    <div class="container-narrow">
+      <div id="nav"></div>
+      <div class="jumbotron">
+        <h1>Lorem Ipsum</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+      <div id="root"></div>
+      </div>
+
+    </div>
+
         <Button
       	    	onClick={this.showCallout}
       		    content="Get Started"
@@ -94,9 +106,16 @@ class HomePage extends Component {
            this.setState({user: data["data"]["data"], 
                           username: userText, 
                           activityLikes: data["data"]["data"]["activityLikes"],
-                          foodLikes: data["data"]["data"]["foodLikes"]});
+                          foodLikes: data["data"]["data"]["foodLikes"],
+                          isLoggedIn: true});
            console.log(data["data"]["data"]);
            console.log("user state is: " + this.state.user);
+       })
+       .catch((error) => {
+            this.setState({user: {},
+                          username: "Invalid username.",
+                          activityLikes: [],
+                          foodLikes: []});
        });
   }
 

@@ -1,10 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import NavPage from './components/Pages/NavPage.js';
-import HomePage from './components/Pages/HomePage.js';
+import Preferences from './components/Pages/Preferences';
+import Recommendations from './components/Pages/Recommendations';
+import HomePage from './components/Pages/HomePage';
+import { Switch, Router, Route, BrowserRouter } from 'react-router-dom';
 import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<NavPage />, document.getElementById('nav'));
-ReactDOM.render(<HomePage />, document.getElementById('root'));
-registerServiceWorker();
+const Main = () => {
+  return (
+    <div className="container">
+    <Switch>
+      <Route exact path='/' component={HomePage}/>
+      <Route exact path='/preferences' component={Preferences}/>
+      <Route path='/recommendations' component={Recommendations}/>
+    </Switch>
+    </div>
+  );
+};
+
+ReactDOM.render(
+  <BrowserRouter>
+    <Route path='/' component={Main} />
+  </BrowserRouter>,
+  document.getElementById('root')
+);
