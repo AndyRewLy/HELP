@@ -1,9 +1,9 @@
 from flask_restful import Resource
-from flask import make_response
+from flask import make_response, request
 from flask_jsonpify import jsonify
 from .user_clustering import getFoodRecommendations, getActivityRecommendations, getAllUsers
 from .user import *
-from .dbConnector import getUser
+from .dbConnector import getUser, putUser
 from .yelpAPI import getBusiness, getSearch
 
 class UserDAO(Resource):
@@ -22,6 +22,9 @@ class UserDAO(Resource):
       #  	return jsonify(userJSON(user))
       # 
       #return jsonify({'data':{'username': 'invalid username' + username}})
+   def put(self, username):
+      data = request.get_json(silent=True)
+      putUser(data.get('username'), data.get('activityLikes'), data.get('foodLikes'))
 
 class UsersAll(Resource):
 

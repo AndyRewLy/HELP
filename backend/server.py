@@ -11,7 +11,7 @@ from .userDAO import UserDAO, UsersAll, UserRecommendationFood, UserRecommendati
 #PROJECT_ROOT = os.path.abspath(os.pardir)
 #REACT_DIR = PROJECT_ROOT + "\help-react\src"
 app = Flask(__name__, static_url_path='')
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 api = Api(app)
 
 api.add_resource(UsersAll, '/User/')

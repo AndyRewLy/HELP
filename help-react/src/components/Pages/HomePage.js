@@ -30,6 +30,9 @@ class HomePage extends Component {
 
     this.getUser = this.getUser.bind(this);
     this.getFoodRecommendations = this.getFoodRecommendations.bind(this);
+
+    this.updateFoodLikes = this.updateFoodLikes.bind(this);
+
   }
 
   showCallout() {
@@ -50,6 +53,8 @@ class HomePage extends Component {
   }
 
   render() {
+    console.log("updateFoodLikes is" + this.updateFoodLikes);
+
     return (
       <div className = "HomePage">
         <Button
@@ -77,7 +82,7 @@ class HomePage extends Component {
         <button className="btn btn-large btn-success" onClick={this.getFoodRecommendations}>Get Food Recommendations</button>
         <div id="recommendedFood">
           <p>Recommended Foods:</p>
-          <RecommendationCardList listFromParent={this.state.recommendedFood}/>
+          <RecommendationCardList listFromParent={this.state.recommendedFood} updateFoodLikes={this.updateFoodLikes}/>
         </div>
       </div>
     );
@@ -107,6 +112,19 @@ class HomePage extends Component {
        });
   }
 
+ updateFoodLikes(foodTitle) {
+    console.log("MADE IT HERE with: " + foodTitle);
+    this.state.user["foodLikes"].push(foodTitle);
+    console.log(this.state.user["foodLikes"]);
+    axios.put('http://localhost:5000/User/' + this.state.user.username + '/', this.state.user, {headers:{'Content-Type': 'application/json'}})
+       .then(r => console.log(r.status));
+
+    this.getUser(this.state.username);
+    this.getFoodRecommendations();
+
+    this.forceUpdate();
+  }
+ 
 
 }
 
