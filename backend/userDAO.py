@@ -14,6 +14,9 @@ class UserDAO(Resource):
       users = [User('chicken', ['eating'], ['chinese', 'japanese']),
            User('chicken1', ['eating', 'running'], ['chinese', 'bolivian']),
            User('natashaeatschickens', ['eating', 'fighting'], ['chinese', 'japanese', 'mac'])]
+      user = getUser(username)
+      if user == {}:
+          return make_response("User does not exist.", 404)
       print(getUser(username))
       return jsonify({'data': getUser(username)})
 
