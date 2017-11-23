@@ -1,7 +1,7 @@
 import json
 from .user import User, jsonToUser
 from .dbConnector import getAllUsers
-
+from .categories import getCategories
 def compareUserActivities(user1, user2):
    
    likenessScore = 0
@@ -104,6 +104,17 @@ def recommendFoods(users, foodUsers, currUser):
             if food not in foods and food not in currFoods:
                foods.append(food)
    print(foods)
+
+   if len(foods) < 5:
+      (activeCategories, foodCategories) = getCategories();
+      
+      for category in foodCategories:
+         if len(foods) >= 5:
+            break
+
+         if category["alias"] not in foods and category["alias"] not in currFoods:
+            foods.append(category["alias"])
+
    return foods
 
 def getActivityRecommendations(username):
@@ -128,5 +139,6 @@ def getFoodRecommendations(username):
    (activityUsers, foodUsers) = getHighestComparison(userSimilarities, username)
    print("Printing Food users...")
    print(foodUsers)
+
    return recommendFoods(users, foodUsers, username)
 
