@@ -67,25 +67,35 @@ def getHighestComparison(userSimilarities, username):
 
    return (matchedActivityUsers, matchedFoodUsers)
 
-#Takes in users (user objects) and activityUsers(usernames only)
 def recommendActivities(users, activityUsers, currUser):
    activities = []
    currActivities = []
    for user in users:
-      if user.username == currUser:
-          currActivities = user.activityLikes
-          break
-   
+      userObj = jsonToUser(user)
+      if userObj.username == currUser:
+         currFoods = userObj.activityLikes
+         break
+
    for user in users:
-      username = user.username
+      userObj = jsonToUser(user)
+      username = userObj.username
       if username in activityUsers:
-         for activity in user.activityLikes:
+         for activity in userObj.activityLikes:
             if activity not in activities and activity not in currActivities:
                activities.append(activity)
-      
-   print(activities)
+
+   if len(activities) < 5:
+      (activeCategories, foodCategories) = getCategories();
+
+      for category in activeCategories:
+         if len(activities) >= 5:
+            break
+
+         if category["alias"] not in activities and category["alias"] not in currActivities:
+            activities.append(category["alias"])
+
    return activities
-   
+
 def recommendFoods(users, foodUsers, currUser):
    foods = []
    currFoods = []

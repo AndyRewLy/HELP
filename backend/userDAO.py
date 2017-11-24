@@ -35,7 +35,6 @@ class UsersAll(Resource):
         return jsonify({'data': getAllUsers()})
 
 class UserRecommendationFood(Resource):
- 
      def get(self, username, location):
          #make database conneciton here
          user = getUser(username)

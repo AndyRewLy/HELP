@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NavPage from './NavPage';
-import { getFoodRecommendations } from '../../utils/user-api';
+import { getFoodRecommendations, getActivityRecommendations } from '../../utils/user-api';
 
 
 class Recommendations extends Component {
@@ -17,8 +17,15 @@ class Recommendations extends Component {
     });
   }
 
+  getActivityRecommendations() {
+    getActivityRecommendations('broccoli').then((data) => {
+      this.setState({username: this.state.username, activityRecs: data, foodRecs: this.state.foodRecs});
+    });
+  }
+
   componentDidMount() {
     this.getFoodRecommendations();
+    this.getActivityRecommendations();
   }
 
   render() {
@@ -59,7 +66,7 @@ class Recommendations extends Component {
                     <h3 className="panel-title"> <span className="btn">{ activity }</span></h3>
                   </div>
                   <div className="panel-body">
-                    <p> whyyy </p>
+                    <p> kill me </p>
                   </div>
                 </div>
               </div>
@@ -70,7 +77,7 @@ class Recommendations extends Component {
 
         <div className="col-sm-12">
           <div className="jumbotron text-center">
-            <h2>you cant update this cuz no </h2>
+            <h2>you should be able to update this eventually </h2>
           </div>
         </div>
       </div>
