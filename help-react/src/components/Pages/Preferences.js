@@ -8,7 +8,7 @@ class Preferences extends Component {
 
   constructor() {
     super()
-    this.state = { username: 'hi', activityLikes: [], foodLikes: [] };
+    this.state = { username: '', activityLikes: [], foodLikes: [] };
   }
 
   getPreferences() {
