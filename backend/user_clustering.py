@@ -1,7 +1,10 @@
 import json
+import random
+
 from .user import User, jsonToUser
 from .dbConnector import getAllUsers
 from .categories import getCategories
+
 def compareUserActivities(user1, user2):
    
    likenessScore = 0
@@ -116,8 +119,9 @@ def recommendFoods(users, foodUsers, currUser):
    print(foods)
 
    if len(foods) < 5:
-      (activeCategories, foodCategories) = getCategories();
-      
+      (activeCategories, foodCategories) = getCategories()
+      random.shuffle(foodCategories)
+
       for category in foodCategories:
          if len(foods) >= 5:
             break
