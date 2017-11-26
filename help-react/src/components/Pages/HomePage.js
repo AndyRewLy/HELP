@@ -34,6 +34,7 @@ class HomePage extends Component {
     this.getFoodRecommendations = this.getFoodRecommendations.bind(this);
 
     this.updateFoodLikes = this.updateFoodLikes.bind(this);
+    this.updateState = this.updateState.bind(this);
 
   }
 
@@ -108,8 +109,9 @@ class HomePage extends Component {
                           activityLikes: data["data"]["data"]["activityLikes"],
                           foodLikes: data["data"]["data"]["foodLikes"],
                           isLoggedIn: true});
-           console.log(data["data"]["data"]);
-           console.log("user state is: " + this.state.user);
+           console.log("Current User: " + this.state.user.username +
+                       "Current Food Likes: " + this.state.user.foodLikes);
+           this.updateState();
        })
        .catch((error) => {
             this.setState({user: {},
@@ -128,20 +130,31 @@ class HomePage extends Component {
                           recommendedFood: data["data"]});
            console.log(data["data"]);
            console.log("user food recommendations is: " + this.state.recommendedFood);
+           this.updateState();
        });
   }
 
  updateFoodLikes(foodTitle) {
-    console.log("MADE IT HERE with: " + foodTitle);
     this.state.user["foodLikes"].push(foodTitle);
     console.log(this.state.user["foodLikes"]);
+
     axios.put('http://localhost:5000/User/' + this.state.user.username + '/', this.state.user, {headers:{'Content-Type': 'application/json'}})
-       .then(r => console.log(r.status));
+       .then(r => {
+                console.log(r.status);
+                this.getUser(this.state.username);
+                this.getFoodRecommendations();
+            });
+  }
 
-    this.getUser(this.state.username);
-    this.getFoodRecommendations();
-
-    this.forceUpdate();
+  updateState() {
+    this.setState({user: this.state.user,
+                   username: this.state.username,
+                   isLoggedIn: this.state.isLoggedIn,
+                   isCalloutVisible: this.state.isCalloutVisible,
+                   recommendedActivities: this.state.recommendedActivities,
+                   recommendedFood: this.state.recommendedFood,
+                   foodLikes: this.state.foodLikes,
+                   activityLikes: this.state.activityLikes});
   }
  
 
