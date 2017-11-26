@@ -16,7 +16,6 @@ class RecommendationCard extends Component {
         <p>{Title}</p>
           <div class="btn-group">
             <button className="btn-success" onClick={this.click}><span class="glyphicon glyphicon-ok"></span></button>
-            <button className="btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
           </div>
       </div>
     );
