@@ -15,6 +15,7 @@ class HomePage extends Component {
   constructor(props) {
     super(props);
     this.handleData = this.handleData.bind(this);
+    sessionStorage.setItem('currentUser', '');
     this.state = {
       user: {},
       username: '',
@@ -51,7 +52,6 @@ class HomePage extends Component {
   }
 
   handleData(data) {
-
     this.getUser(data);
   }
 
@@ -155,8 +155,11 @@ class HomePage extends Component {
                    recommendedFood: this.state.recommendedFood,
                    foodLikes: this.state.foodLikes,
                    activityLikes: this.state.activityLikes});
+    sessionStorage.setItem('currentUser', this.state.username);
+    window.location.replace("http://localhost:3000/preferences");
   }
- 
+
+
 
 }
 

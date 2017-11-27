@@ -8,22 +8,29 @@ class Recommendations extends Component {
 
   constructor() {
     super()
-    this.state = { username: '', activityRecs: [], foodRecs: [] };
+    this.state = { username: sessionStorage.getItem('currentUser'), activityRecs: [], foodRecs: [] };
+  }
+
+  getCurrentUser() {
+    var current_user = sessionStorage.getItem('currentUser');
+    console.log('user is' + current_user);
+    this.setState({username: current_user, activityRecs: this.state.activityRecs, foodRecs: this.state.activityRecs});
   }
 
   getFoodRecommendations() {
-    getFoodRecommendations('broccoli').then((data) => {
+    getFoodRecommendations(this.state.username).then((data) => {
       this.setState({username: this.state.username, activityRecs: this.state.activityRecs, foodRecs: data});
     });
   }
 
   getActivityRecommendations() {
-    getActivityRecommendations('broccoli').then((data) => {
+    getActivityRecommendations(this.state.username).then((data) => {
       this.setState({username: this.state.username, activityRecs: data, foodRecs: this.state.foodRecs});
     });
   }
 
   componentDidMount() {
+    //this.getCurrentUser();
     this.getFoodRecommendations();
     this.getActivityRecommendations();
   }

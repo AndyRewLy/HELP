@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import { isLoggedIn, login, logout } from '../../utils/login-utils';
 import './NavPage.css';
 
 class NavPage extends Component {
+
   render() {
     return (
       <nav className="navbar navbar-default">
@@ -12,16 +13,19 @@ class NavPage extends Component {
         </div>
         <ul className="nav navbar-nav">
           <li>
-            <Link to="/">Link?</Link>
+            <Link to="/preferences/">Preferences</Link>
           </li>
           <li>
-           <Link to="/">LINK</Link>
+           <Link to="/recommendations/">Recommendations</Link>
           </li>
         </ul>
         <ul className="nav navbar-nav navbar-right">
-          <li><button className="btn btn-info log">Log In</button></li>
-          <li><button className="btn btn-danger log">Log out </button></li>
-        </ul>
+          <li>
+           {
+             (isLoggedIn()) ? ( <button className="btn btn-danger log" onClick={() => logout()}>Log out </button> ) : ( <button className="btn btn-info log" onClick={() => login()}>Log In</button> )
+           }
+          </li>
+         </ul>
       </nav>
     );
   }

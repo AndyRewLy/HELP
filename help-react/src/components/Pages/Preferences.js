@@ -7,13 +7,13 @@ import { getUserPreferences } from '../../utils/user-api';
 class Preferences extends Component {
 
   constructor() {
-    super()
-    this.state = { username: '', activityLikes: [], foodLikes: [] };
+    super();
+    this.state = { username: sessionStorage.getItem('currentUser'), activityLikes: [], foodLikes: [] };
   }
 
   getPreferences() {
-    getUserPreferences('broccoli').then((data) => {
-      this.setState({username: data.username, activityLikes: data.activityLikes, foodLikes: data.foodLikes});
+    getUserPreferences(this.state.username).then((data) => {
+      this.setState({username: this.state.username, activityLikes: data.activityLikes, foodLikes: data.foodLikes});
     });
   }
 
