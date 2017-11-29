@@ -18,6 +18,7 @@ class Recommendations extends Component {
         foodLikes: [],
         activityLikes: []};
     this.updateFoodLikes = this.updateFoodLikes.bind(this);
+    this.updateActivityLikes = this.updateActivityLikes.bind(this);
     this.getUser = this.getUser.bind(this);
   }
 
@@ -42,6 +43,20 @@ class Recommendations extends Component {
                 console.log(r.status);
                 this.getUser(this.state.username);
                 this.getFoodRecommendations();
+
+                console.log("getFoodRecommendations:     " + this.state.foodRecs)
+            });
+  }
+
+  updateActivityLikes(activityTitle) {
+    this.state.user["activityLikes"].push(activityTitle);
+
+    axios.put('http://localhost:5000/User/' + this.state.user.username + '/', this.state.user, {headers:{'Content-Type': 'application/json'}})
+       .then(r => {
+                console.log(r.status);
+                this.getUser(this.state.username);
+                this.getActivityRecommendations();
+                console.log("activity recommendatinons:     " + this.state.activityRecs)
             });
   }
 
@@ -54,7 +69,8 @@ class Recommendations extends Component {
                           foodLikes: data["data"]["data"]["foodLikes"],
                           isLoggedIn: true});
            console.log("Current User: " + this.state.user.username +
-                       "Current Food Likes: " + this.state.user.foodLikes);
+                       "Current Food Likes: " + this.state.user.foodLikes +
+                       "Current Activity Likes: " + this.state.user.activityLikes);
            this.updateState();
        })
        .catch((error) => {
@@ -74,7 +90,6 @@ class Recommendations extends Component {
                    foodLikes: this.state.foodLikes,
                    activityLikes: this.state.activityLikes});
     sessionStorage.setItem('currentUser', this.state.username);
-    window.location.replace("http://localhost:3000/preferences");
   }
 
   componentDidMount() {
@@ -87,7 +102,6 @@ class Recommendations extends Component {
 
     const { userData }  = this.state;
 
-    console.log("foodtitle aye: " + this.state.user["foodLikes"])
     return (
       <div>
         <NavPage />
@@ -116,11 +130,9 @@ class Recommendations extends Component {
         { (this.state.activityRecs).map((activity) => (
               <div className="col-sm-4" key={activity}>
                 <div className="panel panel-primary">
-                  <div className="panel-heading">
-                    <h3 className="panel-title"> <span className="btn">{ activity }</span></h3>
-                  </div>
                   <div className="panel-body">
-                    <p> stuff here </p>
+                    <center><p>{activity}</p></center>
+                    <center><button className="btn-success" value={activity} onClick={()=>{this.updateActivityLikes(activity)}}><span class="glyphicon glyphicon-ok"></span></button></center>
                   </div>
                 </div>
               </div>
@@ -129,11 +141,6 @@ class Recommendations extends Component {
         <hr/>
         </div>
 
-        <div className="col-sm-12">
-          <div className="jumbotron text-center">
-            <h2>you should be able to update this eventually </h2>
-          </div>
-        </div>
       </div>
     );
   }

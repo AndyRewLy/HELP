@@ -80,23 +80,6 @@ class HomePage extends Component {
       			content={<LoginForm handlerFromHomePage={this.handleData} onDismiss = {this.hideCallout} />}
       		/>
       	}
-        <p>Logged in as: {this.state.username}</p>
-
-        <div id="activityLikes">
-          <p>All user activity likes:</p>
-          <CardsList listFromParent={this.state.activityLikes}/>
-        </div>
-
-        <div id="foodLikes">
-          <p>All user foodLikes likes:</p>
-          <CardsList listFromParent={this.state.foodLikes}/>
-        </div>
-
-        <button className="btn btn-large btn-success" onClick={this.getFoodRecommendations}>Get Food Recommendations</button>
-        <div id="recommendedFood">
-          <p>Recommended Foods:</p>
-          <RecommendationCardList listFromParent={this.state.recommendedFood} updateFoodLikes={this.updateFoodLikes}/>
-        </div>
       </div>
     );
   }
@@ -156,7 +139,7 @@ class HomePage extends Component {
                    foodLikes: this.state.foodLikes,
                    activityLikes: this.state.activityLikes});
     sessionStorage.setItem('currentUser', this.state.username);
-    //window.location.replace("http://localhost:3000/preferences");
+    window.location.replace("http://localhost:3000/preferences");
   }
 
 

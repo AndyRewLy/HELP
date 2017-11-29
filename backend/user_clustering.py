@@ -76,7 +76,7 @@ def recommendActivities(users, activityUsers, currUser):
    for user in users:
       userObj = jsonToUser(user)
       if userObj.username == currUser:
-         currFoods = userObj.activityLikes
+         currActivities = userObj.activityLikes
          break
 
    for user in users:

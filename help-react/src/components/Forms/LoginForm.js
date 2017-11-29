@@ -51,7 +51,7 @@ class LoginForm extends Component {
 						</div>
 						<div class="form-element">
 							  <h4>Password:</h4>
-							  <input class="form-input" type="text" name="password" defaultValue="" />
+							  <input class="form-input" type="password" name="password" defaultValue="" />
 						</div>
 						<br/>
 				  </form>
