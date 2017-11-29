@@ -35,9 +35,6 @@ class Preferences extends Component {
         { (this.state.foodLikes).map((food) => (
               <div className="col-sm-4" key={food}>
                 <div className="panel panel-primary">
-                  <div className="panel-heading">
-                    <h3 className="panel-title"> <span className="btn">{ food }</span></h3>
-                  </div>
                   <div className="panel-body">
                     <p>{ food }</p>
                   </div>
@@ -55,11 +52,8 @@ class Preferences extends Component {
         { (this.state.activityLikes).map((activity) => (
               <div className="col-sm-4" key={activity}>
                 <div className="panel panel-primary">
-                  <div className="panel-heading">
-                    <h3 className="panel-title"> <span className="btn">{ activity }</span></h3>
-                  </div>
                   <div className="panel-body">
-                    <p> whyyy </p>
+                    <p> { activity } </p>
                   </div>
                 </div>
               </div>
@@ -68,11 +62,6 @@ class Preferences extends Component {
         <hr/>
         </div>
 
-        <div className="col-sm-12">
-          <div className="jumbotron text-center">
-            <h2>you cant update this cuz no </h2>
-          </div>
-        </div>
       </div>
     );
   }

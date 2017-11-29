@@ -24,3 +24,4 @@ function getFoodBusinessRecommendations(username, location, category) {
   console.log(url);
   return axios.get(url).then((response) => response.data);
 }
+

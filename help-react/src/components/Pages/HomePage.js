@@ -156,7 +156,7 @@ class HomePage extends Component {
                    foodLikes: this.state.foodLikes,
                    activityLikes: this.state.activityLikes});
     sessionStorage.setItem('currentUser', this.state.username);
-    window.location.replace("http://localhost:3000/preferences");
+    //window.location.replace("http://localhost:3000/preferences");
   }
 
 
