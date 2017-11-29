@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NavPage from './NavPage';
-import { getFoodBusinessRecommendations, getActivityRecommendations } from '../../utils/user-api';
-
+import { getFoodBusinessRecommendations, getActivityRecommendations, getUserPreferences } from '../../utils/user-api';
 
 class FindBusinesses extends Component {
 
@@ -11,10 +10,13 @@ class FindBusinesses extends Component {
     this.state = {
       username: sessionStorage.getItem('currentUser'),
       zip_code: '', chosen_category: '',
-      recs: ['hello'] };
+      recs: [],
+      activityLikes: [],
+      foodLikes: []};
     this.setZipCode = this.setZipCode.bind(this);
     this.setCategory = this.setCategory.bind(this);
     this.getFoodRecommendations = this.getFoodRecommendations.bind(this);
+    this.getPreferences = this.getPreferences.bind(this);
   }
 
 
@@ -44,8 +46,15 @@ class FindBusinesses extends Component {
     });
   }
 
+  getPreferences() {
+    getUserPreferences(this.state.username).then((data) => {
+      this.setState({username: this.state.username, activityLikes: data.activityLikes, foodLikes: data.foodLikes});
+    });
+  }
+
   componentDidMount() {
-    //this.getFoodRecommendations();
+    this.getPreferences();
+    //new Selectr(document.getElementById('mySelect'));
   }
 
   render() {
@@ -58,6 +67,14 @@ class FindBusinesses extends Component {
 
         <div className="row">
         <h3 className="text-center">Enter Location and Category </h3>
+
+        <select id="mySelect">
+        { (this.state.foodLikes).map((food) => (
+           <option value={food}>{food}</option>
+          ))}
+        </select>
+
+        <br/><br/>
 
          <input type="text"
                name="zip_input"
