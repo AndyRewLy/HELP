@@ -18,6 +18,9 @@ class NavPage extends Component {
           <li>
            <Link to="/recommendations/">Recommendations</Link>
           </li>
+          <li>
+           <Link to="/findbusinesses/">Find Businesses</Link>
+          </li>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li>

@@ -11,12 +11,6 @@ class Recommendations extends Component {
     this.state = { username: sessionStorage.getItem('currentUser'), activityRecs: [], foodRecs: [] };
   }
 
-  getCurrentUser() {
-    var current_user = sessionStorage.getItem('currentUser');
-    console.log('user is' + current_user);
-    this.setState({username: current_user, activityRecs: this.state.activityRecs, foodRecs: this.state.activityRecs});
-  }
-
   getFoodRecommendations() {
     getFoodRecommendations(this.state.username).then((data) => {
       this.setState({username: this.state.username, activityRecs: this.state.activityRecs, foodRecs: data});
@@ -30,7 +24,6 @@ class Recommendations extends Component {
   }
 
   componentDidMount() {
-    //this.getCurrentUser();
     this.getFoodRecommendations();
     this.getActivityRecommendations();
   }
@@ -53,7 +46,7 @@ class Recommendations extends Component {
                     <h3 className="panel-title"> <span className="btn">{ food }</span></h3>
                   </div>
                   <div className="panel-body">
-                    <p>{ food }</p>
+                    <p> other stuff here </p>
                   </div>
                 </div>
               </div>
@@ -73,7 +66,7 @@ class Recommendations extends Component {
                     <h3 className="panel-title"> <span className="btn">{ activity }</span></h3>
                   </div>
                   <div className="panel-body">
-                    <p> kill me </p>
+                    <p> stuff here </p>
                   </div>
                 </div>
               </div>

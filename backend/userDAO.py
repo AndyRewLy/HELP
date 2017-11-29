@@ -35,10 +35,9 @@ class UsersAll(Resource):
         return jsonify({'data': getAllUsers()})
 
 class UserRecommendationFood(Resource):
-     def get(self, username, location):
-         #make database conneciton here
+     def get(self, username, location, category):
          user = getUser(username)
-         business_ids = getSearch(location, user["foodLikes"])
+         business_ids = getSearch(location, [category])
          businesses = []
  
          for business in business_ids:

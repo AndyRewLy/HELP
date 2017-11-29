@@ -16,10 +16,9 @@ api = Api(app)
 
 api.add_resource(UsersAll, '/User/')
 api.add_resource(UserDAO, '/User/<username>/')
-api.add_resource(UserRecommendationFood, '/User/<username>/recommend/food/<location>')
+api.add_resource(UserRecommendationFood, '/User/<username>/recommend/food/<location>/<category>')
 api.add_resource(UserRecommendationFoodCategories, '/User/<username>/recommend/food/category')
 api.add_resource(UserRecommendationActivityCategories, '/User/<username>/recommend/activity/category')
-
 activeUsers = []
 
 

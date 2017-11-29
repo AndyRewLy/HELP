@@ -63,8 +63,8 @@ class HomePage extends Component {
     <div class="container-narrow">
       <div id="nav"></div>
       <div class="jumbotron">
-        <h1>Lorem Ipsum</h1>
-        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        <h1>HALP</h1>
+        <p class="lead">Find restaurants and businesses that suit your tastes!</p>
       <div id="root"></div>
       </div>
 
