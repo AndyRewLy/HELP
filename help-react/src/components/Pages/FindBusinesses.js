@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NavPage from './NavPage';
+import './FindBusinesses.css';
 import { getFoodBusinessRecommendations, getActivityRecommendations, getUserPreferences } from '../../utils/user-api';
 
 class FindBusinesses extends Component {
@@ -57,6 +58,8 @@ class FindBusinesses extends Component {
     //new Selectr(document.getElementById('mySelect'));
   }
 
+
+
   render() {
 
     const { userData }  = this.state;
@@ -68,31 +71,34 @@ class FindBusinesses extends Component {
         <div className="row">
         <h3 className="text-center">Enter Location and Category </h3>
 
-        <select id="mySelect">
-        { (this.state.foodLikes).map((food) => (
-           <option value={food}>{food}</option>
+
+        <select id="mySelect" onChange={this.setCategory}>
+          <optgroup label="Foods">
+          {(this.state.foodLikes).map((food) => (
+            <option value={food}>{food}</option>
           ))}
+          </optgroup>
+          <optgroup label="Activities">
+           {(this.state.activityLikes).map((activity) => (
+            <option value={activity}>{activity}</option>
+          ))}
+          </optgroup>
         </select>
+
 
         <br/><br/>
 
          <input type="text"
                name="zip_input"
-               value={this.state.zip_code}
                onChange={this.setZipCode}/>
-        <button className="btn btn-large btn-success">Enter Zip Code</button>
+        <button className="btn btn-large btn-success" onClick={this.getFoodRecommendations} >Enter Zip Code</button>
 
         <br/><br/>
-
-         <input type="text"
-               name="category_input"
-               value={this.state.chosen_category}
-               onChange={this.setCategory}/>
-        <button className="btn btn-large btn-success" onClick={this.getFoodRecommendations}>Enter Category</button>
 
 
         <hr/>
         </div>
+
 
 
         <div className="row">
@@ -100,17 +106,23 @@ class FindBusinesses extends Component {
         <hr/>
 
         { (this.state.recs).map((rec) => (
-              <div className="col-sm-4" key={rec}>
+            <div className="col-sm-4" key={rec}>
                 <div className="panel panel-primary">
-                  <div className="panel-heading">
-                    <h3 className="panel-title"> <span className="btn">{ rec["name"] }</span></h3>
-                  </div>
-                  <div className="panel-body">
-                    <p>address: { rec["location"] }</p>
-                    <p>rating: { rec["rating"] }</p>
+                  <div className="card">
+                    <img className="card-img-top" src={rec["image_url"]} alt=""/>
+                    <div className="card-body">
+                      <h4 className="card-title">{rec["name"]}</h4>
+                      <div className="card-text">
+                        <p>address: { rec["location"] }</p>
+                        <p>rating: { rec["rating"] }</p>
+                      </div>
+                    </div>
+                    <div className="card-footer">
+                      <center><a href={rec["url"]} className="btn btn-primary">Find Out More!</a></center>
+                    </div>
                   </div>
                 </div>
-              </div>
+            </div>
           ))}
 
         </div>
